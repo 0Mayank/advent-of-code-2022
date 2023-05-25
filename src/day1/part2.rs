@@ -1,6 +1,4 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
+use crate::utils::read_lines;
 
 pub fn run() -> i32 {
     let mut elves = vec![0];
@@ -22,12 +20,4 @@ pub fn run() -> i32 {
     let nth_highest = 3;
 
     return elves[0..nth_highest].iter().sum();
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<std::io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }

@@ -1,7 +1,5 @@
+use crate::utils::read_lines;
 use std::collections::HashSet;
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 
 fn priority_of_common_item(first_compartment: &str, second_compartment: &str) -> u32 {
     let mut f = HashSet::new();
@@ -31,13 +29,4 @@ pub fn run() -> i32 {
         let mid = s.len() / 2;
         return acc + priority_of_common_item(&s[0..mid], &s[mid..]);
     }) as i32
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-
-    Ok(io::BufReader::new(file).lines())
 }
