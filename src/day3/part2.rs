@@ -31,7 +31,7 @@ pub fn run() -> i32 {
     let mut count = 0;
     let mut group: Vec<String> = vec![String::new(); 3];
 
-    let sum_of_priorities: u32 = lines.fold(0, |acc, s| {
+    lines.fold(0, |acc, s| {
         group[count] = s.unwrap();
         count += 1;
         if count == 3 {
@@ -39,9 +39,7 @@ pub fn run() -> i32 {
             return acc + priority_of_common_item(&group);
         }
         return acc;
-    });
-
-    return sum_of_priorities as i32;
+    }) as i32
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>

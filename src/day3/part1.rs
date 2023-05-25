@@ -26,13 +26,11 @@ fn priority_of_common_item(first_compartment: &str, second_compartment: &str) ->
 pub fn run() -> i32 {
     let lines = read_lines("src/day3/puzzle_input.txt").unwrap();
 
-    let sum_of_priorities: u32 = lines.fold(0, |acc, s| {
+    lines.fold(0, |acc, s| {
         let s = s.unwrap();
         let mid = s.len() / 2;
         return acc + priority_of_common_item(&s[0..mid], &s[mid..]);
-    });
-
-    return sum_of_priorities as i32;
+    }) as i32
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
