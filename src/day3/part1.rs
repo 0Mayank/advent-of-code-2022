@@ -21,12 +21,14 @@ fn priority_of_common_item(first_compartment: &str, second_compartment: &str) ->
     };
 }
 
-pub fn run() -> i32 {
+pub fn run() -> String {
     let lines = read_lines("src/day3/puzzle_input.txt").unwrap();
 
-    lines.fold(0, |acc, s| {
-        let s = s.unwrap();
-        let mid = s.len() / 2;
-        return acc + priority_of_common_item(&s[0..mid], &s[mid..]);
-    }) as i32
+    lines
+        .fold(0, |acc, s| {
+            let s = s.unwrap();
+            let mid = s.len() / 2;
+            return acc + priority_of_common_item(&s[0..mid], &s[mid..]);
+        })
+        .to_string()
 }

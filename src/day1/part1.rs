@@ -1,6 +1,6 @@
 use crate::utils::read_lines;
 
-pub fn run() -> i32 {
+pub fn run() -> String {
     let mut elves = vec![0];
     let mut i = 0;
     if let Ok(lines) = read_lines("src/day1/puzzle_input.txt") {
@@ -16,5 +16,5 @@ pub fn run() -> i32 {
         }
     }
 
-    return *elves.iter().max().unwrap();
+    return elves.iter().max().unwrap().to_string();
 }

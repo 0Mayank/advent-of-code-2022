@@ -80,7 +80,7 @@ impl Move {
     }
 }
 
-pub fn run() -> i32 {
+pub fn run() -> String {
     let mut total_points = 0;
 
     if let Ok(lines) = read_lines("src/day2/puzzle_input.txt") {
@@ -92,5 +92,5 @@ pub fn run() -> i32 {
         }
     }
 
-    return total_points;
+    return total_points.to_string();
 }

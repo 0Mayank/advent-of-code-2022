@@ -24,18 +24,20 @@ fn priority_of_common_item(group: &[String]) -> u32 {
     };
 }
 
-pub fn run() -> i32 {
+pub fn run() -> String {
     let lines = read_lines("src/day3/puzzle_input.txt").unwrap();
     let mut count = 0;
     let mut group: Vec<String> = vec![String::new(); 3];
 
-    lines.fold(0, |acc, s| {
-        group[count] = s.unwrap();
-        count += 1;
-        if count == 3 {
-            count = 0;
-            return acc + priority_of_common_item(&group);
-        }
-        return acc;
-    }) as i32
+    lines
+        .fold(0, |acc, s| {
+            group[count] = s.unwrap();
+            count += 1;
+            if count == 3 {
+                count = 0;
+                return acc + priority_of_common_item(&group);
+            }
+            return acc;
+        })
+        .to_string()
 }
