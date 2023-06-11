@@ -1,6 +1,7 @@
 mod utils;
 
 mod day1;
+mod day10;
 mod day2;
 mod day3;
 mod day4;
@@ -32,6 +33,8 @@ fn main() {
     mods.insert("day8part2", Box::new(day8::part2::run));
     mods.insert("day9part1", Box::new(day9::part1::run));
     mods.insert("day9part2", Box::new(day9::part2::run));
+    mods.insert("day10part1", Box::new(day10::part1::run));
+    mods.insert("day10part2", Box::new(day10::part2::run));
 
     let args: Vec<String> = env::args().collect();
     println!("{}", mods[args[1].as_str()]());
