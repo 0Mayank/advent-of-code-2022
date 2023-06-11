@@ -1,7 +1,7 @@
 use crate::utils::read_lines;
 
 pub fn run() -> String {
-    let lines = read_lines("src/day4/puzzle_input.txt").unwrap();
+    let lines = read_lines("4").unwrap();
 
     lines
         .fold(0, |acc, pair| {
@@ -24,4 +24,14 @@ pub fn run() -> String {
             return acc;
         })
         .to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(433.to_string(), run());
+    }
 }

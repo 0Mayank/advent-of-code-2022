@@ -77,7 +77,7 @@ impl TreeNode {
 }
 
 pub fn run() -> String {
-    let mut lines = read_lines("src/day7/puzzle_input.txt").unwrap();
+    let mut lines = read_lines("7").unwrap();
     let root_dir = TreeNode::new(NodeType::Dir("/".to_string()), None, None);
     let mut current_dir = Rc::clone(&root_dir);
     lines.next();
@@ -141,4 +141,14 @@ pub fn run() -> String {
             return acc + x.borrow_mut().size();
         })
         .to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(1582412.to_string(), run());
+    }
 }

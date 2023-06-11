@@ -22,7 +22,7 @@ fn priority_of_common_item(first_compartment: &str, second_compartment: &str) ->
 }
 
 pub fn run() -> String {
-    let lines = read_lines("src/day3/puzzle_input.txt").unwrap();
+    let lines = read_lines("3").unwrap();
 
     lines
         .fold(0, |acc, s| {
@@ -31,4 +31,14 @@ pub fn run() -> String {
             return acc + priority_of_common_item(&s[0..mid], &s[mid..]);
         })
         .to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(7824.to_string(), run());
+    }
 }

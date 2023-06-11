@@ -46,7 +46,7 @@ impl Supplies {
 }
 
 pub fn run() -> String {
-    let mut lines = read_lines("src/day5/puzzle_input.txt").unwrap();
+    let mut lines = read_lines("5").unwrap();
     let mut supplies = Supplies::new();
 
     while let Some(line) = lines.next() {
@@ -88,4 +88,14 @@ pub fn run() -> String {
         supplies.mv(line[0], line[1], line[2]);
     }
     return supplies.top_of_stacks();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!("LBLVVTVLP".to_string(), run());
+    }
 }

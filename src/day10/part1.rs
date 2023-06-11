@@ -82,7 +82,7 @@ impl CPU {
 }
 
 pub fn run() -> String {
-    let lines = read_lines("src/day10/puzzle_input.txt").unwrap();
+    let lines = read_lines("10").unwrap();
     let mut cpu = CPU::new();
 
     lines
@@ -101,4 +101,14 @@ pub fn run() -> String {
             return acc + res;
         })
         .to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(11820.to_string(), run());
+    }
 }

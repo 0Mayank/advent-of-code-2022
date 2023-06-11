@@ -131,7 +131,7 @@ impl CPU {
 }
 
 pub fn run() -> String {
-    let lines = read_lines("src/day10/puzzle_input.txt").unwrap();
+    let lines = read_lines("10").unwrap();
     let mut cpu = CPU::new();
 
     lines.for_each(|x| {
@@ -152,4 +152,22 @@ pub fn run() -> String {
     }
 
     output
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        let exp = "\
+####.###....##.###..###..#..#..##..#..#.
+#....#..#....#.#..#.#..#.#.#..#..#.#..#.
+###..#..#....#.###..#..#.##...#..#.####.
+#....###.....#.#..#.###..#.#..####.#..#.
+#....#....#..#.#..#.#.#..#.#..#..#.#..#.
+####.#.....##..###..#..#.#..#.#..#.#..#.
+";
+        assert_eq!(exp.to_string(), run());
+    }
 }

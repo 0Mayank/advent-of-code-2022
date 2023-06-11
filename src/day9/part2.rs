@@ -116,7 +116,7 @@ impl Rope {
 }
 
 pub fn run() -> String {
-    let lines = read_lines("src/day9/puzzle_input.txt").unwrap();
+    let lines = read_lines("9").unwrap();
     let mut rope = Rope::new();
 
     for line in lines {
@@ -131,4 +131,14 @@ pub fn run() -> String {
         }
     }
     rope.visited.len().to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(2504.to_string(), run());
+    }
 }

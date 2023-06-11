@@ -3,7 +3,7 @@ use crate::utils::read_lines;
 pub fn run() -> String {
     let mut elves = vec![0];
     let mut i = 0;
-    if let Ok(lines) = read_lines("src/day1/puzzle_input.txt") {
+    if let Ok(lines) = read_lines("1") {
         for line in lines {
             if let Ok(s) = line {
                 if s.is_empty() {
@@ -17,4 +17,14 @@ pub fn run() -> String {
     }
 
     return elves.iter().max().unwrap().to_string();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(69206.to_string(), run());
+    }
 }

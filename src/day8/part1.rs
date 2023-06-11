@@ -80,7 +80,7 @@ impl TreeMap {
 }
 
 pub fn run() -> String {
-    let lines = read_lines("src/day8/puzzle_input.txt").unwrap();
+    let lines = read_lines("8").unwrap();
     let mut trees_map = TreeMap::new();
 
     for line in lines {
@@ -92,4 +92,14 @@ pub fn run() -> String {
     }
 
     trees_map.visible_trees().to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(1796.to_string(), run());
+    }
 }

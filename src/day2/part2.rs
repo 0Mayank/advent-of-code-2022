@@ -121,7 +121,7 @@ impl TurnResult {
 pub fn run() -> String {
     let mut total_points = 0;
 
-    if let Ok(lines) = read_lines("src/day2/puzzle_input.txt") {
+    if let Ok(lines) = read_lines("2") {
         for line in lines {
             if let Ok(line) = line {
                 let turn: Turn = line.try_into().unwrap();
@@ -131,4 +131,14 @@ pub fn run() -> String {
     }
 
     return total_points.to_string();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(12316.to_string(), run());
+    }
 }

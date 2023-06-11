@@ -25,7 +25,7 @@ fn priority_of_common_item(group: &[String]) -> u32 {
 }
 
 pub fn run() -> String {
-    let lines = read_lines("src/day3/puzzle_input.txt").unwrap();
+    let lines = read_lines("3").unwrap();
     let mut count = 0;
     let mut group: Vec<String> = vec![String::new(); 3];
 
@@ -40,4 +40,14 @@ pub fn run() -> String {
             return acc;
         })
         .to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(2798.to_string(), run());
+    }
 }

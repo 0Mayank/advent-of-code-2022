@@ -3,6 +3,8 @@ use std::{
     ops::{Deref, DerefMut},
 };
 
+use crate::utils::read_lines;
+
 struct SlidingWindow {
     value: VecDeque<char>,
     index: usize,
@@ -52,7 +54,7 @@ impl SlidingWindow {
 }
 
 pub fn run() -> String {
-    let datastream = include_str!("puzzle_input.txt");
+    let datastream = read_lines("6").unwrap().next().unwrap().unwrap();
     let mut window = SlidingWindow::new();
 
     for c in datastream.chars() {
@@ -62,4 +64,14 @@ pub fn run() -> String {
     }
 
     return "Start-of-packet marker not found".to_string();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(1909.to_string(), run());
+    }
 }
