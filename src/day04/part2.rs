@@ -7,10 +7,10 @@ pub fn run() -> String {
         .fold(0, |acc, pair| {
             let pair = pair.unwrap();
             let pair: Vec<_> = pair
-                .split(",")
+                .split(',')
                 .map(|s| {
-                    let s: Vec<_> = s.split("-").map(|x| x.parse::<i32>().unwrap()).collect();
-                    return s;
+                    let s: Vec<_> = s.split('-').map(|x| x.parse::<i32>().unwrap()).collect();
+                    s
                 })
                 .collect();
             let contains = (pair[0][0] >= pair[1][0] && pair[0][1] <= pair[1][1])
@@ -23,7 +23,7 @@ pub fn run() -> String {
                 return acc + 1;
             }
 
-            return acc;
+            acc
         })
         .to_string()
 }

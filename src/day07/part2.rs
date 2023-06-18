@@ -39,12 +39,12 @@ impl TreeNode {
         for child in &self.children {
             if let NodeType::Dir(cname) = &child.borrow_mut().value {
                 if cname == name {
-                    return Some(Rc::clone(&child));
+                    return Some(Rc::clone(child));
                 }
             }
         }
 
-        return None;
+        None
     }
 
     fn size(&mut self) -> usize {
@@ -57,7 +57,7 @@ impl TreeNode {
         }
         self.size = Some(size);
 
-        return size;
+        size
     }
 
     fn bfs(
@@ -91,7 +91,7 @@ pub fn run() -> String {
                 Some("cd") => match line.next() {
                     Some("..") => {
                         let parent =
-                            Weak::upgrade(&current_dir.borrow_mut().parent.as_ref().unwrap())
+                            Weak::upgrade(current_dir.borrow_mut().parent.as_ref().unwrap())
                                 .unwrap();
                         current_dir = Rc::clone(&parent);
                     }
@@ -139,7 +139,7 @@ pub fn run() -> String {
                     return true;
                 }
             }
-            return false;
+            false
         })
         .fold(0, |acc, x| {
             if acc == 0 {
@@ -148,7 +148,7 @@ pub fn run() -> String {
             if x.borrow().size.unwrap() < acc {
                 return x.borrow().size.unwrap();
             }
-            return acc;
+            acc
         })
         .to_string()
 }

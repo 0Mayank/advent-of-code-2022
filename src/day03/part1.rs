@@ -14,11 +14,11 @@ fn priority_of_common_item(first_compartment: &str, second_compartment: &str) ->
 
     let common = *f.intersection(&s).next().unwrap();
 
-    if common.is_uppercase() == true {
-        return common as u32 - 'A' as u32 + 27;
+    if common.is_uppercase() {
+        common as u32 - 'A' as u32 + 27
     } else {
-        return common as u32 - 'a' as u32 + 1;
-    };
+        common as u32 - 'a' as u32 + 1
+    }
 }
 
 pub fn run() -> String {
@@ -28,7 +28,7 @@ pub fn run() -> String {
         .fold(0, |acc, s| {
             let s = s.unwrap();
             let mid = s.len() / 2;
-            return acc + priority_of_common_item(&s[0..mid], &s[mid..]);
+            acc + priority_of_common_item(&s[0..mid], &s[mid..])
         })
         .to_string()
 }

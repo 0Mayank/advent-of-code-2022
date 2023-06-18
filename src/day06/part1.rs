@@ -40,14 +40,14 @@ impl SlidingWindow {
                     self.pop_front();
                 }
                 self.push_back(*c);
-                return None;
+                None
             }
             None => {
                 self.push_back(*c);
                 if self.len() == 4 {
                     return Some(self.index);
                 }
-                return None;
+                None
             }
         }
     }
@@ -63,7 +63,7 @@ pub fn run() -> String {
         }
     }
 
-    return "Start-of-packet marker not found".to_string();
+    "Start-of-packet marker not found".to_string()
 }
 
 #[cfg(test)]

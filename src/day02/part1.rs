@@ -21,13 +21,13 @@ impl TryFrom<String> for Turn {
         let opp: Move = if let Some(s) = ip.next() {
             s.try_into()?
         } else {
-            return Err(format!("No move present for Opponent"));
+            return Err("No move present for Opponent".to_string());
         };
 
         let you: Move = if let Some(s) = ip.next() {
             s.try_into()?
         } else {
-            return Err(format!("No move present for You"));
+            return Err("No move present for You".to_string());
         };
 
         Ok(Self { opponent: opp, you })
@@ -45,7 +45,7 @@ impl Turn {
         }
 
         p += self.you.points();
-        return p;
+        p
     }
 }
 
@@ -84,15 +84,13 @@ pub fn run() -> String {
     let mut total_points = 0;
 
     if let Ok(lines) = read_lines("2") {
-        for line in lines {
-            if let Ok(line) = line {
-                let turn: Turn = line.clone().try_into().unwrap();
-                total_points += turn.points();
-            }
+        for line in lines.flatten() {
+            let turn: Turn = line.clone().try_into().unwrap();
+            total_points += turn.points();
         }
     }
 
-    return total_points.to_string();
+    total_points.to_string()
 }
 
 #[cfg(test)]

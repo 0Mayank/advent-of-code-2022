@@ -47,7 +47,7 @@ impl Supplies {
             msg += self.stacks.get(&stack).unwrap().back().unwrap();
         }
 
-        return msg;
+        msg
     }
 }
 
@@ -78,7 +78,7 @@ pub fn run() -> String {
                 consecutive_spaces = 0;
                 return true;
             }
-            return false;
+            false
         })
         .enumerate()
         .filter(|(_, c)| !c.is_empty())
@@ -93,7 +93,7 @@ pub fn run() -> String {
             .collect();
         supplies.mv(line[0], line[1], line[2]);
     }
-    return supplies.top_of_stacks();
+    supplies.top_of_stacks()
 }
 
 #[cfg(test)]

@@ -9,19 +9,19 @@ fn priority_of_common_item(group: &[String]) -> u32 {
             for x in s.chars() {
                 h.insert(x);
             }
-            return h;
+            h
         })
-        .reduce(|acc, c| acc.intersection(&c).map(|x| *x).collect())
+        .reduce(|acc, c| acc.intersection(&c).copied().collect())
         .unwrap()
         .iter()
         .next()
         .unwrap();
 
-    if common.is_uppercase() == true {
-        return common as u32 - 'A' as u32 + 27;
+    if common.is_uppercase() {
+        common as u32 - 'A' as u32 + 27
     } else {
-        return common as u32 - 'a' as u32 + 1;
-    };
+        common as u32 - 'a' as u32 + 1
+    }
 }
 
 pub fn run() -> String {
@@ -37,7 +37,7 @@ pub fn run() -> String {
                 count = 0;
                 return acc + priority_of_common_item(&group);
             }
-            return acc;
+            acc
         })
         .to_string()
 }

@@ -58,7 +58,7 @@ impl Rope {
     }
 
     fn tail(&self) -> &Coords {
-        &self.body.last().unwrap()
+        self.body.last().unwrap()
     }
 
     fn right(&mut self, by: i32) {

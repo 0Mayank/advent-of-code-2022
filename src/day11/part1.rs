@@ -31,7 +31,7 @@ impl Test {
         if other % self.divisor == 0 {
             return self.receiver_if_true;
         }
-        return self.receiver_if_false;
+        self.receiver_if_false
     }
 }
 
@@ -207,12 +207,9 @@ impl Monkeys {
 
                 Some(other) => {
                     let mut other = other.split_whitespace();
-                    match other.next() {
-                        Some("Monkey") => {
-                            self.monkeys.push(RefCell::new(Monkey::new()));
-                            current_monkey = self.monkeys.len() - 1;
-                        }
-                        _ => (),
+                    if let Some("Monkey") = other.next() {
+                        self.monkeys.push(RefCell::new(Monkey::new()));
+                        current_monkey = self.monkeys.len() - 1;
                     }
                 }
                 _ => (),

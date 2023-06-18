@@ -4,14 +4,12 @@ pub fn run() -> String {
     let mut elves = vec![0];
     let mut i = 0;
     if let Ok(lines) = read_lines("1") {
-        for line in lines {
-            if let Ok(s) = line {
-                if s.is_empty() {
-                    i += 1;
-                    elves.push(0);
-                } else {
-                    elves[i] += s.parse::<i32>().unwrap();
-                }
+        for line in lines.flatten() {
+            if line.is_empty() {
+                i += 1;
+                elves.push(0);
+            } else {
+                elves[i] += line.parse::<i32>().unwrap();
             }
         }
     }

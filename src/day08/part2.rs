@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use crate::utils::read_lines;
 
 #[derive(Debug)]
@@ -20,7 +22,7 @@ impl TreeMap {
     }
 
     fn add_tree(&mut self, tree: usize) {
-        if self.value.len() == 0 {
+        if self.value.is_empty() {
             self.new_row();
         }
 
@@ -43,28 +45,30 @@ impl TreeMap {
         let mut score_down = n_rows - row - 1;
 
         for (i, tree_height) in self.iter_row(row).enumerate() {
-            if i < col {
-                if tree_height >= given_tree_height {
-                    score_left = col - i;
-                }
-            } else if i > col {
-                if tree_height >= given_tree_height {
+            if tree_height < given_tree_height {
+                continue;
+            }
+            match i.cmp(&col) {
+                Ordering::Less => score_left = col - i,
+                Ordering::Greater => {
                     score_right = i - col;
                     break;
                 }
+                _ => (),
             }
         }
 
         for (i, tree_height) in self.iter_column(col).enumerate() {
-            if i < row {
-                if tree_height >= given_tree_height {
-                    score_up = row - i;
-                }
-            } else if i > row {
-                if tree_height >= given_tree_height {
+            if tree_height < given_tree_height {
+                continue;
+            }
+            match i.cmp(&row) {
+                Ordering::Less => score_up = row - i,
+                Ordering::Greater => {
                     score_down = i - row;
                     break;
                 }
+                _ => (),
             }
         }
 

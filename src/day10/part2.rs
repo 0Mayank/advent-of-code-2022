@@ -4,15 +4,15 @@ use crate::utils::read_lines;
 
 #[derive(Debug)]
 enum Instruction {
-    ADDX,
-    NOOP,
+    Addx,
+    Noop,
 }
 
 impl Instruction {
     fn cycles(&self) -> i32 {
         match self {
-            Self::ADDX => 2,
-            Self::NOOP => 1,
+            Self::Addx => 2,
+            Self::Noop => 1,
         }
     }
 }
@@ -22,8 +22,8 @@ impl TryFrom<&str> for Instruction {
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         match value {
-            "addx" => Ok(Self::ADDX),
-            "noop" => Ok(Self::NOOP),
+            "addx" => Ok(Self::Addx),
+            "noop" => Ok(Self::Noop),
             other => Err(format!("Invalid instruction: {other}")),
         }
     }
@@ -33,15 +33,15 @@ struct Register {
     x: i32,
 }
 
-struct CRT {
+struct Crt {
     value: Vec<Vec<char>>,
     current_row: usize,
     current_pixel: usize,
 }
 
-impl CRT {
+impl Crt {
     fn new() -> Self {
-        CRT {
+        Crt {
             value: vec![vec!['.'; 40]; 6],
             current_pixel: 0,
             current_row: 0,
@@ -49,7 +49,7 @@ impl CRT {
     }
 }
 
-impl Deref for CRT {
+impl Deref for Crt {
     type Target = Vec<Vec<char>>;
 
     fn deref(&self) -> &Self::Target {
@@ -57,28 +57,28 @@ impl Deref for CRT {
     }
 }
 
-impl DerefMut for CRT {
+impl DerefMut for Crt {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-struct CPU {
+struct Cpu {
     instruction: Instruction,
     instruction_cycle: i32,
     ongoing_cycle: i32,
     registers: Register,
-    crt: CRT,
+    crt: Crt,
 }
 
-impl CPU {
+impl Cpu {
     fn new() -> Self {
         Self {
-            instruction: Instruction::NOOP,
+            instruction: Instruction::Noop,
             instruction_cycle: 1,
             ongoing_cycle: 1,
             registers: Register { x: 1 },
-            crt: CRT::new(),
+            crt: Crt::new(),
         }
     }
 
@@ -96,7 +96,7 @@ impl CPU {
         } else {
             let cur_instruction = &self.instruction;
             match cur_instruction {
-                Instruction::ADDX => {
+                Instruction::Addx => {
                     let num = if let Ok(num) = input.parse::<i32>() {
                         num
                     } else {
@@ -104,7 +104,7 @@ impl CPU {
                     };
                     self.registers.x += num;
                 }
-                Instruction::NOOP => {}
+                Instruction::Noop => {}
             }
         }
 
@@ -132,7 +132,7 @@ impl CPU {
 
 pub fn run() -> String {
     let lines = read_lines("10").unwrap();
-    let mut cpu = CPU::new();
+    let mut cpu = Cpu::new();
 
     lines.for_each(|x| {
         let line = x.unwrap();

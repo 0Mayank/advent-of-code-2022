@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use crate::utils::read_lines;
 
 #[derive(Debug)]
@@ -20,7 +22,7 @@ impl TreeMap {
     }
 
     fn add_tree(&mut self, tree: usize) {
-        if self.value.len() == 0 {
+        if self.value.is_empty() {
             self.new_row();
         }
 
@@ -41,27 +43,31 @@ impl TreeMap {
 
         for (i, tree_height) in self.iter_row(row).enumerate() {
             if tree_height >= given_tree_height {
-                if i < col {
-                    visible_from_left = false
-                } else if i > col {
-                    visible_from_right = false;
-                    break;
+                match i.cmp(&col) {
+                    Ordering::Less => visible_from_left = false,
+                    Ordering::Greater => {
+                        visible_from_right = false;
+                        break;
+                    }
+                    _ => (),
                 }
             }
         }
 
         for (i, tree_height) in self.iter_column(col).enumerate() {
             if tree_height >= given_tree_height {
-                if i < row {
-                    visible_from_up = false
-                } else if i > row {
-                    visible_from_down = false;
-                    break;
+                match i.cmp(&row) {
+                    Ordering::Less => visible_from_up = false,
+                    Ordering::Greater => {
+                        visible_from_down = false;
+                        break;
+                    }
+                    _ => (),
                 }
             }
         }
 
-        return visible_from_left || visible_from_right || visible_from_up || visible_from_down;
+        visible_from_left || visible_from_right || visible_from_up || visible_from_down
     }
 
     fn visible_trees(&self) -> usize {

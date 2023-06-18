@@ -94,16 +94,15 @@ impl Grid {
 
         for (row, line) in input.lines().enumerate() {
             for (col, c) in line.chars().enumerate() {
-                let elevation;
-                match c {
-                    'S' => elevation = 0,
+                let elevation = match c {
+                    'S' => 0,
                     'E' => {
                         grid.start = (col, row).into();
-                        elevation = 25
+                        25
                     }
-                    'a'..='z' => elevation = c as u8 - b'a',
+                    'a'..='z' => c as u8 - b'a',
                     _ => panic!("Invalid character"),
-                }
+                };
                 grid.data.push(elevation);
             }
         }
@@ -119,7 +118,7 @@ impl Grid {
                 if self[current] > self[neighbour] + 1 {
                     return None;
                 }
-                return Some(*neighbour);
+                Some(*neighbour)
             })
             .collect()
     }

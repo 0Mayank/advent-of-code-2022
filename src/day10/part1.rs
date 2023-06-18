@@ -2,15 +2,15 @@ use crate::utils::read_lines;
 
 #[derive(Debug)]
 enum Instruction {
-    ADDX,
-    NOOP,
+    Addx,
+    Noop,
 }
 
 impl Instruction {
     fn cycles(&self) -> i32 {
         match self {
-            Self::ADDX => 2,
-            Self::NOOP => 1,
+            Self::Addx => 2,
+            Self::Noop => 1,
         }
     }
 }
@@ -20,8 +20,8 @@ impl TryFrom<&str> for Instruction {
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         match value {
-            "addx" => Ok(Self::ADDX),
-            "noop" => Ok(Self::NOOP),
+            "addx" => Ok(Self::Addx),
+            "noop" => Ok(Self::Noop),
             other => Err(format!("Invalid instruction: {other}")),
         }
     }
@@ -31,17 +31,17 @@ struct Register {
     x: i32,
 }
 
-struct CPU {
+struct Cpu {
     instruction: Instruction,
     instruction_cycle: i32,
     ongoing_cycle: i32,
     registers: Register,
 }
 
-impl CPU {
+impl Cpu {
     fn new() -> Self {
         Self {
-            instruction: Instruction::NOOP,
+            instruction: Instruction::Noop,
             instruction_cycle: 1,
             ongoing_cycle: 1,
             registers: Register { x: 1 },
@@ -57,7 +57,7 @@ impl CPU {
         } else {
             let cur_instruction = &self.instruction;
             match cur_instruction {
-                Instruction::ADDX => {
+                Instruction::Addx => {
                     let num = if let Ok(num) = input.parse::<i32>() {
                         num
                     } else {
@@ -65,7 +65,7 @@ impl CPU {
                     };
                     self.registers.x += num;
                 }
-                Instruction::NOOP => {}
+                Instruction::Noop => {}
             }
         }
 
@@ -83,7 +83,7 @@ impl CPU {
 
 pub fn run() -> String {
     let lines = read_lines("10").unwrap();
-    let mut cpu = CPU::new();
+    let mut cpu = Cpu::new();
 
     lines
         .fold(0, |acc, x| {
@@ -98,7 +98,7 @@ pub fn run() -> String {
                 }
             }
 
-            return acc + res;
+            acc + res
         })
         .to_string()
 }
