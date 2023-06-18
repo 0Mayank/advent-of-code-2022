@@ -169,3 +169,13 @@ pub fn run() -> String {
     let grid = Grid::parse(&read_to_string("12").unwrap());
     grid.shortest_path_from_s_to_e().to_string()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(423.to_string(), run());
+    }
+}

@@ -166,3 +166,13 @@ pub fn run() -> String {
     let grid = Grid::parse(&read_to_string("12").unwrap());
     grid.shortest_path_from_e_to_elevation_a().to_string()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn verify() {
+        assert_eq!(416.to_string(), run());
+    }
+}
