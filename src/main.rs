@@ -11,6 +11,7 @@ mod day08;
 mod day09;
 mod day10;
 mod day11;
+mod day12;
 
 use std::{collections::HashMap, env};
 
@@ -38,6 +39,8 @@ fn main() {
     mods.insert("day10part2", Box::new(day10::part2::run));
     mods.insert("day11part1", Box::new(day11::part1::run));
     mods.insert("day11part2", Box::new(day11::part2::run));
+    mods.insert("day12part1", Box::new(day12::part1::run));
+    mods.insert("day12part2", Box::new(day12::part2::run));
 
     let args: Vec<String> = env::args().collect();
     println!("{}", mods[args[1].as_str()]());
