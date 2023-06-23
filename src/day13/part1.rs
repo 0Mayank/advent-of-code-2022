@@ -28,7 +28,7 @@ impl Ord for Node {
                         other => return other,
                     }
                 }
-                return Ordering::Equal;
+                Ordering::Equal
             }
             (Self::Num(a), Self::List(_)) => Self::List(vec![Self::Num(*a)]).cmp(other),
             (Self::List(_), Self::Num(b)) => self.cmp(&Self::List(vec![Self::Num(*b)])),
@@ -109,7 +109,7 @@ pub fn run() -> String {
             if pair.0 < pair.1 {
                 return acc + i + 1;
             }
-            return acc;
+            acc
         })
         .to_string()
 }

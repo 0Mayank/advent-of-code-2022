@@ -28,7 +28,7 @@ impl Ord for Node {
                         other => return other,
                     }
                 }
-                return Ordering::Equal;
+                Ordering::Equal
             }
             (Self::Num(a), Self::List(_)) => Self::List(vec![Self::Num(*a)]).cmp(other),
             (Self::List(_), Self::Num(b)) => self.cmp(&Self::List(vec![Self::Num(*b)])),
