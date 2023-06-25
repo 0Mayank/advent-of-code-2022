@@ -64,8 +64,7 @@ impl Grid {
     fn parse(input: &str) -> Result<Self, String> {
         let mut rocks: Vec<_> = input
             .lines()
-            .map(|x| Self::polyline(x.split(" -> ").map(|coord| coord.try_into().unwrap())))
-            .flatten()
+            .flat_map(|x| Self::polyline(x.split(" -> ").map(|coord| coord.try_into().unwrap())))
             .collect();
 
         let source = Coord { x: 500, y: 0 };
@@ -209,13 +208,7 @@ pub fn run() -> String {
     grid.data
         .iter()
         .flatten()
-        .filter(|x| {
-            if let Tile::Sand(State::Rest) = x {
-                true
-            } else {
-                false
-            }
-        })
+        .filter(|x| matches!(x, Tile::Sand(State::Rest)))
         .count()
         .to_string()
 }
